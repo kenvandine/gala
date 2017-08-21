@@ -591,6 +591,16 @@ namespace Gala
 				win.clear_effects ();*/
 		}
 
+		public void enable_blur_behind (uint32 window_id) {
+			foreach (unowned Meta.WindowActor actor in Meta.Compositor.get_window_actors (get_screen ())) {
+				if ((uint32)actor.get_meta_window ().get_xwindow () == window_id) {
+					var blur_effect = new WindowBlurBehindEffect (actor.get_meta_window (), 40.0f);
+					actor.add_effect (blur_effect);
+					break;
+				}
+			}
+		}
+
 		/**
 		 * {@inheritDoc}
 		 */

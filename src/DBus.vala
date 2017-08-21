@@ -104,11 +104,11 @@ namespace Gala
 		 * the average color in that area and the mean color value and variance. All
 		 * variables are returned as a tuple in that order.
 		 *
-		 * @param monitor          The monitor where the panel will be placed
-		 * @param reference_x      X coordinate of the rectangle used to gather color data
-		 *                         relative to the monitor you picked. Values will be clamped
-		 *                         to its dimensions
-		 * @param reference_y      Y coordinate
+		 * @param monitor		  The monitor where the panel will be placed
+		 * @param reference_x	  X coordinate of the rectangle used to gather color data
+		 *						 relative to the monitor you picked. Values will be clamped
+		 *						 to its dimensions
+		 * @param reference_y	  Y coordinate
 		 * @param reference_width  Width of the rectangle
 		 * @param reference_height Height of the rectangle
 		 */
@@ -135,7 +135,7 @@ namespace Gala
 				throw new DBusError.INVALID_ARGS ("Invalid rectangle specified");
 
 			double variance = 0, mean = 0,
-			       rTotal = 0, gTotal = 0, bTotal = 0;
+				   rTotal = 0, gTotal = 0, bTotal = 0;
 
 			ulong paint_signal_handler = 0;
 			paint_signal_handler = effect.done_painting.connect (() => {
@@ -152,7 +152,7 @@ namespace Gala
 				double pixel = 0;
 
 				double max, min, score, delta, scoreTotal = 0,
-				       rTotal2 = 0, gTotal2 = 0, bTotal2 = 0;
+					   rTotal2 = 0, gTotal2 = 0, bTotal2 = 0;
 
 				// code to calculate weighted average color is copied from
 				// plank's lib/Drawing/DrawingService.vala average_color()
@@ -235,6 +235,12 @@ namespace Gala
 			yield;
 
 			return { rTotal, gTotal, bTotal, mean, variance };
+		}
+		
+		public void enable_blur_behind (uint32 window_id) {
+			if (wm is WindowManagerGala) {
+				((WindowManagerGala)wm).enable_blur_behind (window_id);
+			}
 		}
 	}
 }
